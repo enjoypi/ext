@@ -11,6 +11,12 @@ func Assert(condition bool) {
 	}
 }
 
+func AssertM(condition bool, msg string) {
+	if !condition {
+		panic(errors.New(msg))
+	}
+}
+
 func AssertE(err error) {
 	if err != nil {
 		panic(err)
