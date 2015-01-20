@@ -2,10 +2,13 @@ package ext
 
 import (
 	"crypto/rand"
+	"crypto/sha1"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"math"
 	"math/big"
+	"os"
 )
 
 var (
@@ -16,6 +19,10 @@ func RandomBigInt() *big.Int {
 	n, err := rand.Int(rand.Reader, maxBigInt)
 	ANoError(err)
 	return n
+}
+
+func RandomUint16() uint16 {
+	return uint16(RandomBigInt().Uint64())
 }
 
 func RandomUint64() uint64 {
@@ -36,4 +43,12 @@ func NewUUID() string {
 	// version 4 (pseudo-random); see section 4.1.3
 	uuid[6] = uuid[6]&^0xf0 | 0x40
 	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[0:4], uuid[4:6], uuid[6:8], uuid[8:10], uuid[10:])
+}
+
+func DeviceID() string {
+	hostname, err := os.Hostname()
+	ANoError(err)
+	hasher := sha1.New()
+	hasher.Write([]byte(hostname))
+	return hex.EncodeToString(hasher.Sum(nil))
 }
