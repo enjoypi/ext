@@ -5,9 +5,15 @@ import (
 	"testing"
 )
 
-func Assert(condition bool) {
+func ATrue(condition bool) {
 	if !condition {
 		panic(errors.New(""))
+	}
+}
+
+func ANotNil(v interface {}, msg string) {
+	if v == nil {
+		panic(errors.New(msg))
 	}
 }
 
@@ -17,7 +23,7 @@ func AssertM(condition bool, msg string) {
 	}
 }
 
-func AssertE(err error) {
+func ANoError(err error) {
 	if err != nil {
 		panic(err)
 	}
