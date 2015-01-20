@@ -11,7 +11,7 @@ func ATrue(condition bool) {
 	}
 }
 
-func ANotNil(v interface {}, msg string) {
+func ANotNil(v interface{}, msg string) {
 	if v == nil {
 		panic(errors.New(msg))
 	}

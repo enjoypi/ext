@@ -2,10 +2,10 @@ package ext
 
 import (
 	"crypto/rand"
-	"math"
-	"math/big"
 	"fmt"
 	"io"
+	"math"
+	"math/big"
 )
 
 var (
@@ -27,7 +27,7 @@ func RandomInt64() int64 {
 }
 
 // newUUID generates a random UUID according to RFC 4122
-func NewUUID() (string) {
+func NewUUID() string {
 	uuid := make([]byte, 16)
 	n, err := io.ReadFull(rand.Reader, uuid)
 	ATrue(n == len(uuid) && err == nil)
