@@ -20,10 +20,21 @@ func CheckLesser(t *testing.T, lhs interface{}, rhs interface{}) {
 	lvalue := reflect.ValueOf(lhs)
 	rvalue := reflect.ValueOf(rhs)
 
-	if lvalue.Type() == rvalue.Type() && compare(lvalue, rvalue) < 0 {
+	if compare(lvalue, rvalue) < 0 {
 		return
 	}
 	t.Fatalf("%T:%+v >= %T:%+v\n%s", lhs, lhs, rhs, rhs, Stack())
+}
+
+func CheckLE(t *testing.T, lhs interface{}, rhs interface{}) {
+
+	lvalue := reflect.ValueOf(lhs)
+	rvalue := reflect.ValueOf(rhs)
+
+	if compare(lvalue, rvalue) <= 0 {
+		return
+	}
+	t.Fatalf("%T:%+v > %T:%+v\n%s", lhs, lhs, rhs, rhs, Stack())
 }
 
 func CheckGreater(t *testing.T, lhs interface{}, rhs interface{}) {
@@ -31,10 +42,21 @@ func CheckGreater(t *testing.T, lhs interface{}, rhs interface{}) {
 	lvalue := reflect.ValueOf(lhs)
 	rvalue := reflect.ValueOf(rhs)
 
-	if lvalue.Type() == rvalue.Type() && compare(lvalue, rvalue) > 0 {
+	if compare(lvalue, rvalue) > 0 {
 		return
 	}
 	t.Fatalf("%T:%+v <= %T:%+v\n%s", lhs, lhs, rhs, rhs, Stack())
+}
+
+func CheckGE(t *testing.T, lhs interface{}, rhs interface{}) {
+
+	lvalue := reflect.ValueOf(lhs)
+	rvalue := reflect.ValueOf(rhs)
+
+	if compare(lvalue, rvalue) >= 0 {
+		return
+	}
+	t.Fatalf("%T:%+v < %T:%+v\n%s", lhs, lhs, rhs, rhs, Stack())
 }
 
 func compare(lhs, rhs reflect.Value) int {
