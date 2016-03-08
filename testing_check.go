@@ -100,3 +100,9 @@ func compare(lhs, rhs reflect.Value) int {
 
 	panic(errors.New(""))
 }
+
+func AssertNoError(t *testing.T, err error, what string) {
+	if err != nil {
+		t.Fatalf("failed to %s: %s", what, err)
+	}
+}
