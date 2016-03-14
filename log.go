@@ -18,7 +18,7 @@ var (
 	tl          *log.Logger = log.New(os.Stdout, "[TRACE] ", log.LstdFlags)
 	dl          *log.Logger = log.New(os.Stdout, "[DEBUG] ", log.LstdFlags)
 	il          *log.Logger = log.New(os.Stdout, "[INFO] ", log.LstdFlags)
-	el          *log.Logger = log.New(os.Stdout, "[ERROR] ", log.LstdFlags)
+	el          *log.Logger = log.New(os.Stderr, "[ERROR] ", log.LstdFlags)
 	TraceSwitch Trace
 )
 
