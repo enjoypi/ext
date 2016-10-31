@@ -15,6 +15,10 @@ var (
 	maxBigInt = big.NewInt(math.MaxInt64)
 )
 
+func RandomInt(max int) int {
+	return int(RandomInt64()) % max
+}
+
 func RandomBigInt() *big.Int {
 	n, err := rand.Int(rand.Reader, maxBigInt)
 	ANoError(err)
