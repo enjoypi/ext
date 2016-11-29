@@ -1,8 +1,6 @@
 package ext
 
-import (
 // . "reflect"
-)
 
 // func DeepCopy(obj interface{}) interface{} {
 // 	return deepcopy(NewValue(obj), map[uintptr]map[Type]Value{}).Interface()

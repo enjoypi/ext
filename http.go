@@ -2,7 +2,6 @@ package ext
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -42,6 +41,5 @@ func ReadMockFile(filepath string) string {
 		return ""
 	}
 	sdata := string(data)
-	fmt.Println(sdata)
 	return sdata
 }
