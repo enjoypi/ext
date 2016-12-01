@@ -23,7 +23,7 @@ func DecodeJson(r io.Reader) map[string]interface{} {
 	var m map[string]interface{}
 	decoder := json.NewDecoder(r)
 	err := decoder.Decode(&m)
-	if err == nil {
+	if err == nil && len(m) > 0 {
 		return m
 	}
 	return nil
