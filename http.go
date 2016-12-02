@@ -2,6 +2,7 @@ package ext
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -19,14 +20,19 @@ func PerformHttpRequest(r http.Handler, method, path string, header http.Header,
 	return w
 }
 
-func DecodeJson(r io.Reader) map[string]interface{} {
+func DecodeJSON(r io.Reader) (map[string]interface{}, error) {
 	var m map[string]interface{}
 	decoder := json.NewDecoder(r)
 	err := decoder.Decode(&m)
-	if err == nil && len(m) > 0 {
-		return m
+	if err != nil {
+		return nil, err
 	}
-	return nil
+
+	if len(m) <= 0 {
+		return nil, errors.New("ext.DecodeJSON: no content")
+	}
+
+	return m, nil
 }
 
 func ReadMockFile(filepath string) string {
