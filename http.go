@@ -35,6 +35,21 @@ func DecodeJSON(r io.Reader) (map[string]interface{}, error) {
 	return m, nil
 }
 
+func DecodeJSONSlice(r io.Reader) ([]map[string]interface{}, error) {
+	var m []map[string]interface{}
+	decoder := json.NewDecoder(r)
+	err := decoder.Decode(&m)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(m) <= 0 {
+		return nil, errors.New("ext.DecodeJSONSlice: no content")
+	}
+
+	return m, nil
+}
+
 func ReadMockFile(filepath string) string {
 	file, err := os.Open(filepath) // For read access.
 	if err != nil {
@@ -48,4 +63,9 @@ func ReadMockFile(filepath string) string {
 	}
 	sdata := string(data)
 	return sdata
+}
+
+func Pre(handlers map[string]http.HandlerFunc) {
+
+	return
 }
