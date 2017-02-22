@@ -22,8 +22,7 @@ func PerformHttpRequest(r http.Handler, method, path string, header http.Header,
 
 func DecodeJSON(r io.Reader) (map[string]interface{}, error) {
 	var m map[string]interface{}
-	decoder := json.NewDecoder(r)
-	err := decoder.Decode(&m)
+	err := DecodeJsonInto(r, &m)
 	if err != nil {
 		return nil, err
 	}
@@ -35,10 +34,19 @@ func DecodeJSON(r io.Reader) (map[string]interface{}, error) {
 	return m, nil
 }
 
+func DecodeJsonInto(r io.Reader, obj interface{}) error {
+	decoder := json.NewDecoder(r)
+	err := decoder.Decode(obj)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func DecodeJSONSlice(r io.Reader) ([]map[string]interface{}, error) {
 	var m []map[string]interface{}
-	decoder := json.NewDecoder(r)
-	err := decoder.Decode(&m)
+	err := DecodeJsonInto(r, &m)
 	if err != nil {
 		return nil, err
 	}
