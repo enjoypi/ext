@@ -1,8 +1,8 @@
 package ext
 
 import (
+	"crypto/rand"
 	"encoding/hex"
-	"math/rand"
 )
 
 func RandomString(length int) string {
