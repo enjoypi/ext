@@ -1,7 +1,5 @@
 package ext
 
-import ()
-
 const (
 	_ = iota
 	constCmdSet
