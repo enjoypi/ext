@@ -22,6 +22,12 @@ func RandomInt(max int) int {
 	return int(RandomInt64()) % max
 }
 
+func RandomInt63n(n int64) int64 {
+	big, err := rand.Int(rand.Reader, big.NewInt(n))
+	ANoError(err)
+	return big.Int64()
+}
+
 func RandomBigInt() *big.Int {
 	n, err := rand.Int(rand.Reader, maxBigInt)
 	ANoError(err)
