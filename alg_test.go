@@ -1,7 +1,11 @@
 package ext
 
 import (
+	"fmt"
+	"math"
+	"math/rand"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -33,4 +37,29 @@ func TestEncrypt(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.EqualValues(t, plain, p)
+}
+
+func TestRandomIntn(t *testing.T) {
+	m := make(map[int]int)
+	max := 10
+	n := 1000000
+	rand.Seed(time.Now().Unix())
+	for i := 0; i < n; i++ {
+		m[rand.Intn(max)] += 1
+	}
+
+	assert.Equal(t, max, len(m))
+	minAmount := int(math.MaxInt64)
+	maxAmount := int(math.MinInt64)
+	total := int(0)
+	for _, amount := range m {
+		total += amount
+		if amount < minAmount {
+			minAmount = amount
+		}
+		if amount > maxAmount {
+			maxAmount = amount
+		}
+	}
+	fmt.Println(t.Name(), maxAmount, minAmount, float64((maxAmount-minAmount)*max)/float64(n))
 }

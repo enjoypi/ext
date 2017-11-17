@@ -15,27 +15,35 @@ import (
 )
 
 var (
-	maxBigInt = big.NewInt(math.MaxInt64)
+	maxInt8   = big.NewInt(math.MaxInt8)
+	maxUint8  = big.NewInt(math.MaxUint8)
+	maxInt16  = big.NewInt(math.MaxInt16)
+	maxUint16 = big.NewInt(math.MaxUint16)
+	maxInt32  = big.NewInt(math.MaxInt32)
+	maxUint32 = big.NewInt(math.MaxUint32)
+	maxInt64  = big.NewInt(math.MaxInt64)
 )
 
 func RandomInt(max int) int {
-	return int(RandomInt64()) % max
+	return int(RandomInt63n(int64(max)))
 }
 
-func RandomInt63n(n int64) int64 {
-	big, err := rand.Int(rand.Reader, big.NewInt(n))
+func RandomInt63n(max int64) int64 {
+	n, err := rand.Int(rand.Reader, big.NewInt(max))
 	ANoError(err)
-	return big.Int64()
+	return n.Int64()
 }
 
 func RandomBigInt() *big.Int {
-	n, err := rand.Int(rand.Reader, maxBigInt)
+	n, err := rand.Int(rand.Reader, maxInt64)
 	ANoError(err)
 	return n
 }
 
 func RandomUint16() uint16 {
-	return uint16(RandomBigInt().Uint64())
+	n, err := rand.Int(rand.Reader, maxUint16)
+	ANoError(err)
+	return uint16(n.Uint64())
 }
 
 func RandomUint64() uint64 {
