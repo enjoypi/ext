@@ -36,12 +36,7 @@ func DecodeJSON(r io.Reader) (map[string]interface{}, error) {
 
 func DecodeJsonInto(r io.Reader, obj interface{}) error {
 	decoder := json.NewDecoder(r)
-	err := decoder.Decode(obj)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return decoder.Decode(obj)
 }
 
 func DecodeJSONSlice(r io.Reader) ([]map[string]interface{}, error) {
